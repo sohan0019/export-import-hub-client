@@ -4,11 +4,14 @@ import './index.css'
 import { router } from './Router/Router'
 import { RouterProvider } from "react-router/dom";
 import { ToastContainer } from 'react-toastify';
+import AuthProvider from './Context/AuthProvider';
 
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
-    <RouterProvider router={router} />
-    <ToastContainer />
+    <AuthProvider>
+      <RouterProvider router={router} />
+      <ToastContainer />
+    </AuthProvider>
   </StrictMode>,
 )
