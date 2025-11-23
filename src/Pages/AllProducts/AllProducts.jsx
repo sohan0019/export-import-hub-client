@@ -32,7 +32,7 @@ const AllProducts = () => {
   return (
     <section>
       <div className='bg-gray-50 py-10'>
-        <h1 className="text-2xl text-center font-bold"> All Products</h1>
+        <h1 className="text-2xl text-center font-bold mb-5"> All Products</h1>
 
         <form onSubmit={handleSearch} className="text-center mt-5  mb-10 flex gap-2 justify-center">
           <label className="input rounded-full">

@@ -14,9 +14,9 @@ const AddProduct = () => {
       productName: e.target.name.value,
       productImage: e.target.photoURL.value,
       originCountry: e.target.country.value,
-      availableQuantity: e.target.quantity.value, 
-      price: e.target.price.value,
-      rating: e.target.rating.value, 
+      availableQuantity: Number(e.target.quantity.value), 
+      price: Number(e.target.price.value),
+      rating: Number(e.target.rating.value), 
       created_at: new Date(),
       created_by: user.email,
     }
@@ -38,6 +38,7 @@ const AddProduct = () => {
     .then(data => {
       console.log(data);
       toast.success("Product added Successfully.")
+      e.target.reset();
     })
     .catch(error => {
       toast.error(error.message)
@@ -73,19 +74,19 @@ const AddProduct = () => {
               {/* Available Quantity */}
               <div>
                 <label className="label font-medium text-black text-base mb-2">Available Quantity</label>
-                <input type="text" name="quantity" required className="input w-full rounded-full focus:border-0 focus:outline-gray-200" placeholder="0000...." />
+                <input type="number" name="quantity" required className="input w-full rounded-full focus:border-0 focus:outline-gray-200" placeholder="0000...." />
               </div>
 
               {/* Price */}
               <div>
                 <label className="label font-medium text-black text-base mb-2">Price</label>
-                <input type="text" name="price" required className="input w-full rounded-full focus:border-0 focus:outline-gray-200" placeholder="$0000..." />
+                <input type="number" name="price" required className="input w-full rounded-full focus:border-0 focus:outline-gray-200" placeholder="$0000..." />
               </div>
 
               {/* Rating */}
               <div>
                 <label className="label font-medium text-black text-base mb-2">Rating</label>
-                <input type="text" name="rating" required className="input w-full rounded-full focus:border-0 focus:outline-gray-200" placeholder="5" />
+                <input type="number" name="rating" required className="input w-full rounded-full focus:border-0 focus:outline-gray-200" placeholder="5" step="0.1"/>
               </div>
 
               {/* Add Product Button */}
