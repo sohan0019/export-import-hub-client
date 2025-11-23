@@ -28,7 +28,7 @@ const Card = ({ product }) => {
           ))}
           </span>
         </div>
-        <Link to={`/model-details/${_id}`} className="btn rounded-full bg-linear-to-r from-pink-500 to-red-600 hover:from-red-600 hover:to-pink-500 text-white w-full btn-md text-base">See Details</Link>
+        <Link to={`/product/${_id}`} className="btn rounded-full bg-linear-to-r from-pink-500 to-red-600 hover:from-red-600 hover:to-pink-500 text-white w-full btn-md text-base">See Details</Link>
       </div>
     </div>
   );

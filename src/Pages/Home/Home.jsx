@@ -18,7 +18,7 @@ const Home = () => {
 
         <div className='grid grid-cols-3 gap-[3%] px-10'>
           {
-            data.map(product => <Card product={product}></Card>)
+            data.map(product => <Card key={product._id} product={product}></Card>)
           }
         </div>
         <div className='flex justify-center mt-16'>
