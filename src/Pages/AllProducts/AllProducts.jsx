@@ -8,7 +8,7 @@ const AllProducts = () => {
 
   const data = useLoaderData();
   const [loading, setLoading] = useState(false);
-  const [model, setModel] = useState(data)
+  const [product, setProduct] = useState(data)
 
   const handleSearch = (e) => {
     e.preventDefault()
@@ -20,7 +20,7 @@ const AllProducts = () => {
       .then(res => res.json())
       .then(data => {
         // console.log(data);
-        setModel(data);
+        setProduct(data);
         setLoading(false);
       })
       .catch(error => {
@@ -48,12 +48,12 @@ const AllProducts = () => {
         </form>
 
         <div className="grid grid-cols-3 gap-6 px-10">
-          {model.length === 0 ? (
+          {product.length === 0 ? (
             <p className="col-span-3 text-center text-xl font-semibold">
               No Items Found
             </p>
           ) : (
-            model.map(product => <Card key={product._id} product={product} />)
+            product.map(product => <Card key={product._id} product={product} />)
           )}
         </div>
       </div>

@@ -6,9 +6,6 @@ const Card = ({ product }) => {
 
   const { productName, productImage, originCountry, price, _id, availableQuantity, rating } = product
 
-  const numRating = parseFloat(rating)
-  const starsCount = Math.floor(numRating);
-
   return (
     <div className="card bg-base-100 shadow-xl hover:shadow-2xl transition-all duration-300 hover:-translate-y-2">
       <figure className="h-48 overflow-hidden">
@@ -22,16 +19,16 @@ const Card = ({ product }) => {
         <h2>Quantity: <span className='font-semibold'>{availableQuantity}</span></h2>
         <div className='flex justify-between mb-2'>
           <h2>Ratings: <span className="ml-1 font-semibold">
-            {numRating.toFixed(1)}
+            {rating.toFixed(1)}
           </span></h2>
           
           <span className='flex text-yellow-600'>
-            {[...Array(starsCount)].map((_, i) => (
+            {[...Array(Math.floor(rating))].map((_, i) => (
             <FaStar key={i} />
           ))}
           </span>
         </div>
-        <Link to={`/product/${_id}`} className="btn rounded-full bg-linear-to-r from-pink-500 to-red-600 hover:from-red-600 hover:to-pink-500 text-white w-full btn-md text-base">See Details</Link>
+        <Link to={`/product/${product.productId}`} className="btn rounded-full bg-linear-to-r from-pink-500 to-red-600 hover:from-red-600 hover:to-pink-500 text-white w-full btn-md text-base">See Details</Link>
       </div>
     </div>
   );

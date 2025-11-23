@@ -1,8 +1,9 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { AuthContext } from '../../Context/AuthContext';
-import { useParams } from 'react-router';
+import { useNavigate, useParams } from 'react-router';
 import { FaStar } from 'react-icons/fa';
 import { TbDownload } from 'react-icons/tb';
+import { toast } from 'react-toastify';
 
 const ProductDetails = () => {
 
@@ -11,6 +12,7 @@ const ProductDetails = () => {
   const [product, setProduct] = useState({});
   const [importQuantity, setImportQuantity] = useState(0);
   const [isValid, setIsValid] = useState(true);
+  const navigate = useNavigate();
 
   useEffect(() => {
     fetch(`http://localhost:3000/product/${id}`, {
@@ -26,9 +28,78 @@ const ProductDetails = () => {
       })
   }, [id, user, setLoading])
 
+  const handleQuantityChange = (e) => {
+    const inputValue = e.target.value;
+
+    if (inputValue === '') {
+      setImportQuantity('');
+      setIsValid(true);
+      return;
+    }
+
+    const value = Number(inputValue);
+    setImportQuantity(value);
+
+    if (value > product.availableQuantity) {
+      setIsValid(false);
+    } else {
+      setIsValid(true);
+    }
+  };
+
+  const handleSubmit = () => {
+    if (!product._id) { // Check if _id exists before proceeding
+      toast.error("Product ID not found.");
+      return;
+    }
+
+    const importedData = {
+      productId: product._id,
+      productName: product.productName,
+      productImage: product.productImage,
+      price: product.price,
+      originCountry: product.originCountry,
+      rating: product.rating,
+      quantity: importQuantity,
+      created_at: new Date(),
+      imported_by: user.email
+    }
+
+    fetch(`http://localhost:3000/product/import/${product._id}`, {
+      method: 'POST',
+      headers: {
+        "content-type": "application/json",
+      },
+      body: JSON.stringify(importedData),
+    })
+      .then(res => res.json())
+      .then(data => {
+        console.log(data);
+        setProduct(prev => ({
+          ...prev,
+          availableQuantity: prev.availableQuantity - importQuantity
+        }));
+        toast.success("Import Successful");
+        document.getElementById("my_modal_7").checked = false;
+        navigate('/allProducts')
+      })
+      .catch(error => {
+        console.log(error.message);
+        toast.error(error.message);
+      })
+  }
+
+  if (loading) {
+    return (
+      <div className="flex justify-center items-center h-screen">
+        <span className="loading loading-spinner text-primary"></span>
+      </div>
+    );
+  }
+
   return (
     <section>
-      <div className="hero bg-amber-50 py-20">
+      <div className="hero bg-gray-50 py-20">
         <div className="hero-content flex-col md:flex-row-reverse">
           <div className='flex-1'>
             <img src={product.productImage} className=" rounded-lg shadow-2xl max-h-[480px] min-h-[300px] w-full" />
@@ -50,7 +121,6 @@ const ProductDetails = () => {
             </div>
             <label htmlFor="my_modal_7" className="btn btn-info mt-4 text-lg rounded-2xl">Import Now <TbDownload /></label>
 
-            {/* Put this part before </body> tag */}
             <input type="checkbox" id="my_modal_7" className="modal-toggle" />
             <div className="modal" role="dialog">
               <div className="modal-box">
@@ -58,8 +128,8 @@ const ProductDetails = () => {
 
                 <p className="mb-3">Enter quantity to import:</p>
 
-                <input type="number" className="input input-bordered w-full" value={importQuantity}
-                  // onChange={handleQtyChange} 
+                <input type="number" className="input input-bordered w-full" placeholder='0'
+                  onChange={handleQuantityChange}
                   min="1" />
 
                 {!isValid && (
@@ -67,12 +137,11 @@ const ProductDetails = () => {
                 )}
 
                 <div className="modal-action">
-                  <button className="btn btn-primary" disabled={!isValid || importQuantity <= 0} 
-                  // onClick={handleSubmit}
-                  >Submit</button>
+                  <button className="btn btn-primary" disabled={!isValid || importQuantity <= 0}
+                    onClick={handleSubmit}>Import</button>
                 </div>
-                <label className="modal-backdrop" htmlFor="my_modal_7">Close</label>
               </div>
+              <label className="modal-backdrop" htmlFor="my_modal_7">Close</label>
             </div>
           </div>
         </div>
