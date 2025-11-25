@@ -63,7 +63,7 @@ const ImportCard = ({ product, onRemove }) => {
         <h2 className="card-title">{productName}</h2>
         <div className="badge text-xs badge-xs badge-secondary rounded-full">{originCountry}</div>
         <h2>Price: <span className='font-semibold'>{price}</span></h2>
-        <h2>Quantity: <span className='font-semibold'>{quantity}</span></h2>
+        <h2>Imported Quantity: <span className='font-semibold'>{quantity}</span></h2>
         <div className='flex justify-between mb-2'>
           <h2>Ratings: <span className="ml-1 font-semibold">
             {typeof rating === 'number' ? rating.toFixed(1) : 'N/A'}

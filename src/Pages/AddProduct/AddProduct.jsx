@@ -2,10 +2,12 @@ import React, { useContext } from 'react';
 import { AuthContext } from '../../Context/AuthContext';
 import { toast } from 'react-toastify';
 import formBg from '../../assets/Images/FormBg.png'
+import { useNavigate } from 'react-router';
 
 const AddProduct = () => {
 
   const {user} = useContext(AuthContext);
+  const navigate = useNavigate();
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -38,6 +40,7 @@ const AddProduct = () => {
     .then(data => {
       console.log(data);
       toast.success("Product added Successfully.")
+      navigate('/myExports')
       e.target.reset();
     })
     .catch(error => {
