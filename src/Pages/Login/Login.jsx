@@ -50,14 +50,14 @@ const Login = () => {
 
   return (
     <section style={{ backgroundImage: `linear-gradient(rgba(255, 255, 255, 0.5), rgba(255, 255, 255, 0.5)), url(${bgImg})` }}>
-      <div className='flex flex-row  min-h-screen'>
-        <div className='flex-1 my-auto text-center'>
-          <h1 className='text-7xl font-semibold text-purple-950'>Welcome Back</h1>
-          <img className='mx-auto h-96' src={loginImg} alt="" />
-          <h2 className='text-3xl mt-5 text-gray-600'>Please login to get started......</h2>
+      <div className='flex md:flex-row flex-col min-h-screen'>
+        <div className='flex-1 my-auto text-center md:py-0 pt-10'>
+          <h1 className='lg:text-7xl text-4xl font-semibold text-purple-950'>Welcome Back</h1>
+          <img className='mx-auto lg:h-96 h-84' src={loginImg} alt="" />
+          <h2 className='lg:text-3xl text-xl mt-5 text-gray-600'>Please login to get started......</h2>
         </div>
 
-        <div className="card flex-1 h-fit shrink-0 my-auto">
+        <div className="card flex-1 h-fit shrink-0 my-auto  md:py-0 py-10">
           <div className="card-body mx-[13%] bg-base-100 shadow-2xl rounded-3xl">
             <h2 className='text-5xl font-semibold italic text-center text-purple-950 mb-5'>Login</h2>
             <form onSubmit={handleLogin} className="fieldset">

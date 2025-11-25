@@ -117,13 +117,13 @@ const Registration = () => {
 
   return (
     <section style={{ backgroundImage: `linear-gradient(rgba(255, 255, 255, 0.2), rgba(255, 255, 255, 0.2)), url(${regImg})`, backgroundSize: "cover", backgroundPosition: "center", backgroundRepeat: "no-repeat", }}>
-      <div className='flex flex-row min-h-screen'>
-        <div className='flex-1 my-auto text-left'>
-          <h1 className='text-6xl font-semibold text-white px-10'>Create an Account and start exploring..</h1>
+      <div className='flex md:flex-row flex-col min-h-screen'>
+        <div className='flex-1 my-auto md:text-left text-center lg:py-0 py-30'>
+          <h1 className='lg:text-6xl text-3xl font-semibold text-white px-10'>Create an Account and start exploring..</h1>
         </div>
 
-        <div className="card flex-1 h-fit shrink-0 my-auto">
-          <div className="card-body mx-[13%] bg-base-100 shadow-2xl rounded-3xl">
+        <div className="card lg:flex-1 md:flex-2 flex-1 h-fit shrink-0 my-auto md:pb-0 pb-10">
+          <div className="card-body sm:mx-[13%] mx-6 bg-base-100 shadow-2xl rounded-3xl">
             <h2 className='text-5xl font-semibold italic text-center text-purple-950 mb-5'>Register</h2>
             <form onSubmit={handleSignUp} className="fieldset">
 

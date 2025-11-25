@@ -50,9 +50,9 @@ const AddProduct = () => {
 
   return (
     <section>
-      <div className='py-20 bg-gray-50 bg-cover bg-center relative' style={{ 
+      <div className='py-20 bg-gray-50 bg-cover bg-center relative px-5' style={{ 
       backgroundImage: `url(${formBg})`}}>
-        <div className="card border border-orange-500 bg-base-100 w-full max-w-md mx-auto shadow-2xl rounded-2xl">
+        <div className="card border border-orange-500 bg-base-100 w-full max-w-md mx-auto shadow-2xl rounded-2xl ">
           <div className="card-body p-6 relative">
             <h2 className="text-2xl font-bold text-center mb-6">Add New Model</h2>
             <form onSubmit={handleSubmit} className="space-y-4">
