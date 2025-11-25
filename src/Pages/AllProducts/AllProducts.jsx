@@ -35,19 +35,21 @@ const AllProducts = () => {
         <h1 className="text-2xl text-center font-bold mb-5"> All Products</h1>
 
         <form onSubmit={handleSearch} className="text-center mt-5  mb-10 flex gap-2 justify-center">
-          <label className="input rounded-full">
-            <svg className="h-[1em] opacity-50" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-              <g strokeLinejoin="round" strokeLinecap="round" strokeWidth="2.5" fill="none" stroke="currentColor">
-                <circle cx="11" cy="11" r="8"></circle>
-                <path d="m21 21-4.3-4.3"></path>
-              </g>
-            </svg>
-            <input type="search" placeholder="Search" name="search" />
-          </label>
-          <button className="btn btn-secondary rounded-full">{loading ? "Searching..." : "Search"}</button>
+          <div className='flex sm:flex-row flex-col'>
+            <label className="input rounded-full">
+              <svg className="h-[1em] opacity-50" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                <g strokeLinejoin="round" strokeLinecap="round" strokeWidth="2.5" fill="none" stroke="currentColor">
+                  <circle cx="11" cy="11" r="8"></circle>
+                  <path d="m21 21-4.3-4.3"></path>
+                </g>
+              </svg>
+              <input type="search" placeholder="Search" name="search" />
+            </label>
+            <button className="btn btn-secondary rounded-full w-fit mx-auto sm:mt-0 mt-2">{loading ? "Searching..." : "Search"}</button>
+          </div>
         </form>
 
-        <div className="grid grid-cols-3 gap-6 px-10">
+        <div className="grid big:grid-cols-3 sm:grid-cols-2 grid-cols-1 gap-6 px-10">
           {product.length === 0 ? (
             <p className="col-span-3 text-center text-xl font-semibold">
               No Items Found
