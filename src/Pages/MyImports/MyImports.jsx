@@ -21,6 +21,10 @@ const MyImports = () => {
       })
   }, [user, setLoading])
 
+  const handleRemoveFromUI = (id) => {
+    setProduct(prev => prev.filter(product => product._id !== id));
+  };
+
   if (loading) {
     return (
       <div className="flex justify-center items-center h-screen">
@@ -38,7 +42,7 @@ const MyImports = () => {
               No Items Found
             </p>
           ) : (
-            product.map(product => <ImportCard key={product._id} product={product} />)
+            product.map(product => <ImportCard key={product._id} product={product} onRemove={handleRemoveFromUI}/>)
           )}
         </div>
       </div>

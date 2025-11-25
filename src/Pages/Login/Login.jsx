@@ -26,8 +26,8 @@ const Login = () => {
         console.log(result.user);
         // e.target.reset();
         setLoading(false);
-        navigate(location.state || "/");
         toast.success("Login Successfull!")
+        navigate(location.state || "/");
       })
       .catch((error) => {
         toast.error(error.message);
@@ -39,6 +39,7 @@ const Login = () => {
     .then(result => {
       console.log(result.user);
       setLoading(false);
+      toast.success("Login Successfull!")
       navigate(location.state || "/");
     })
     .catch(error => {

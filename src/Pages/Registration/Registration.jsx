@@ -32,12 +32,43 @@ const Registration = () => {
 
     createUser(email, password)
       .then(result => {
-        console.log(result.user);
-        updateUserProfile(displayName, photoURL);
-        e.target.reset();
-        setLoading(false);
-        navigate("/");
-        toast.success("User created Successfully!")
+        updateUserProfile(displayName, photoURL)
+          .then(() => {
+            const newUser = {
+              name: displayName,
+              email: result.user.email,
+              photo: photoURL,
+            }
+
+            fetch('http://localhost:3000/users', {
+              method: 'POST',
+              headers: {
+                "content-type": 'application/json',
+              },
+              body: JSON.stringify(newUser),
+            })
+              .then(res => res.json())
+              .then((data) => {
+                console.log('Data after user saved', data);
+                e.target.reset();
+                setLoading(false);
+                navigate("/");
+                
+                if (data.message === 'User Already Exist.') {
+                    toast.info("User alreadt exists.");
+                } else {
+                    toast.success("User created Successfully!");
+                }
+              })
+              .catch(dbError => {
+                console.log('Database save error:', dbError.message);
+                toast.error("Failed to save user data to database.");
+              });
+          })
+          .catch(updateError => {
+            console.log('Error updating profile:', updateError.message);
+            toast.error("Registration failed: Could not update user profile.");
+          });
       })
       .catch(error => {
         console.log(error.message);
@@ -47,29 +78,46 @@ const Registration = () => {
 
   const handleGoogleSignIn = () => {
     googleLogin()
-    .then(result => {
-      console.log(result.user);
-      setLoading(false);
-      navigate("/");
-      toast.success("User created Successfully!")
-      // const newUser = {
-      //   name: result.user.displayName,
-      //   email: result.user.email,
-      //   image: result.user.photoURL,
-      // }
-
-      //create user in the database
-
-    })
-    .catch(error => {
-      console.log(error.message);
-      toast.error(error.message);
-    })
+      .then(result => {
+        const newUser = {
+          name: result.user.displayName,
+          email: result.user.email,
+          image: result.user.photoURL,
+        }
+        
+        fetch('http://localhost:3000/users', {
+          method: 'POST',
+          headers: {
+            "content-type": 'application/json',
+          },
+          body: JSON.stringify(newUser),
+        })
+          .then(res => res.json())
+          .then((data) => {
+            console.log('Data after user saved', data);
+            setLoading(false);
+            navigate("/");
+            
+            if (data.message === 'User Already Exist.') {
+                toast.success("Welcome back! Logged in with Google.");
+            } else {
+                toast.success("User created Successfully with Google!");
+            }
+          })
+          .catch(dbError => {
+            console.log('Database save error:', dbError.message);
+            toast.error("Failed to save user data to database after Google sign-in.");
+          });
+      })
+      .catch(error => {
+        console.log(error.message);
+        toast.error(error.message);
+      })
   }
 
   return (
-    <section style={{ backgroundImage: `linear-gradient(rgba(255, 255, 255, 0.2), rgba(255, 255, 255, 0.2)),  url(${regImg})`, backgroundSize: "cover", backgroundPosition: "center", backgroundRepeat: "no-repeat", }}>
-      <div className='flex flex-row  min-h-screen'>
+    <section style={{ backgroundImage: `linear-gradient(rgba(255, 255, 255, 0.2), rgba(255, 255, 255, 0.2)), url(${regImg})`, backgroundSize: "cover", backgroundPosition: "center", backgroundRepeat: "no-repeat", }}>
+      <div className='flex flex-row min-h-screen'>
         <div className='flex-1 my-auto text-left'>
           <h1 className='text-6xl font-semibold text-white px-10'>Create an Account and start exploring..</h1>
         </div>
@@ -81,22 +129,22 @@ const Registration = () => {
 
               <div>
                 <label className="label text-xl text-black mb-1">Name</label>
-                <input type="text" className="input w-full mb-3" placeholder="Your Name" name='name' />
+                <input type="text" className="input w-full mb-3" placeholder="Your Name" name='name' required/>
               </div>
 
               <div>
                 <label className="label text-xl text-black mb-1">Email</label>
-                <input type="email" className="input w-full mb-3" placeholder="abc@gmail.com" name='email' />
+                <input type="email" className="input w-full mb-3" placeholder="abc@gmail.com" name='email' required/>
               </div>
 
               <div>
                 <label className="label text-xl text-black mb-1">Photo URL</label>
-                <input type="text" className="input w-full mb-3" placeholder="Your Photo URL" name='photo' />
+                <input type="text" className="input w-full mb-3" placeholder="Your Photo URL (optional)" name='photo' />
               </div>
 
               <div className='relative'>
                 <label className="label text-xl text-black mb-1">Password</label>
-                <input type={show ? "text" : "password"} className="input w-full mb-1" placeholder="*********" name='password' />
+                <input type={show ? "text" : "password"} className="input w-full mb-1" placeholder="*********" name='password' required/>
                 <span onClick={() => setShow(!show)} className="absolute right-3 top-11 cursor-pointer z-50">
                   {show ? <FaEye className='w-5 h-5' /> : <IoEyeOff className='w-5 h-5' />}
                 </span>
@@ -109,7 +157,7 @@ const Registration = () => {
             <button onClick={handleGoogleSignIn} className="btn bg-gray-800 rounded-full text-white border-amber-100 text-lg hover:text-yellow-100">
               <SiGoogle />Sign Up with Google</button>
 
-            <p className="text-[15px] mt-1 pl-1">Already have an account? Please  <Link className="text-blue-700 hover:text-blue-800 hover:underline" to="/login">Login</Link></p>
+            <p className="text-[15px] mt-1 pl-1">Already have an account? Please <Link className="text-blue-700 hover:text-blue-800 hover:underline" to="/login">Login</Link></p>
 
           </div>
         </div>

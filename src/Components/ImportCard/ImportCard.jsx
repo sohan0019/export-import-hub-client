@@ -7,7 +7,7 @@ import { toast } from 'react-toastify';
 import Swal from 'sweetalert2';
 import { AuthContext } from '../../Context/AuthContext';
 
-const ImportCard = ({ product }) => {
+const ImportCard = ({ product, onRemove }) => {
 
   const { user } = useContext(AuthContext);
   const { productName, productImage, originCountry, price, _id, quantity, rating } = product
@@ -39,6 +39,7 @@ const ImportCard = ({ product }) => {
           .then(res => res.json())
           .then(data => {
             console.log(data);
+            onRemove(product._id);
             navigate('/myImports')
           })
 
