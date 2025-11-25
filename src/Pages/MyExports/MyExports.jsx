@@ -5,7 +5,8 @@ import ExportCard from '../../Components/ExportCard/ExportCard';
 const MyExports = () => {
 
   const [product, setProduct] = useState([]);
-  const { user, loading, setLoading } = useContext(AuthContext);
+  const { user } = useContext(AuthContext);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     fetch(`http://localhost:3000/myExports?email=${user.email}`, {

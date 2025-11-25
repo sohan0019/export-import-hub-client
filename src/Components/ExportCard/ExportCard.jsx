@@ -13,7 +13,6 @@ const ExportCard = ({ product, onUpdate, onRemove }) => {
 
   const { user } = useContext(AuthContext);
   const { productName, productImage, originCountry, price, _id, availableQuantity, rating } = product
-  // const navigate = useNavigate();
 
   const handleDelete = () => {
     if (!_id) {
@@ -93,7 +92,9 @@ const ExportCard = ({ product, onUpdate, onRemove }) => {
         console.log(error);
       })
   }
+  
   const modalId = `modal_${_id}`;
+
   return (
     <div className="card bg-base-100 shadow-xl hover:shadow-2xl transition-all duration-300 hover:-translate-y-2">
       <figure className="h-48 overflow-hidden">

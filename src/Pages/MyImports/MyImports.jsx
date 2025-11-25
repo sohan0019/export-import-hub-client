@@ -5,8 +5,8 @@ import ImportCard from '../../Components/ImportCard/ImportCard'
 const MyImports = () => {
 
   const [product, setProduct] = useState([]);
-  const { user, loading, setLoading } = useContext(AuthContext);
-
+  const { user } = useContext(AuthContext);
+  const [loading, setLoading] = useState(true);
   
   useEffect(() => {
     fetch(`http://localhost:3000/myImports?email=${user.email}`, {
