@@ -50,6 +50,7 @@ const Login = () => {
 
   return (
     <section style={{ backgroundImage: `linear-gradient(rgba(255, 255, 255, 0.5), rgba(255, 255, 255, 0.5)), url(${bgImg})` }}>
+      <title>Import-Export-Hub - Login</title>
       <div className='flex md:flex-row flex-col min-h-screen'>
         <div className='flex-1 my-auto text-center md:py-0 pt-10'>
           <h1 className='lg:text-7xl text-4xl font-semibold text-purple-950'>Welcome Back</h1>

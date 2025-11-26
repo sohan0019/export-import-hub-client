@@ -50,6 +50,7 @@ const AddProduct = () => {
 
   return (
     <section>
+      <title>Import-Export-Hub - AddProduct</title>
       <div className='py-20 bg-gray-50 bg-cover bg-center relative px-5' style={{ 
       backgroundImage: `url(${formBg})`}}>
         <div className="card border border-orange-500 bg-base-100 w-full max-w-md mx-auto shadow-2xl rounded-2xl ">

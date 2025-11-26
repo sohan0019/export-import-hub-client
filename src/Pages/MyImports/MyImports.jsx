@@ -34,6 +34,7 @@ const MyImports = () => {
   }
   return (
     <section>
+      <title>Import-Export-Hub - My Imports</title>
       <div className='bg-gray-50 py-10'>
         <h1 className="text-2xl text-center font-bold mb-10">Imported Products</h1>
         <div className="grid big:grid-cols-3 sm:grid-cols-2 grid-cols-1 gap-6 px-10">

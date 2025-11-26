@@ -31,6 +31,7 @@ const AllProducts = () => {
 
   return (
     <section>
+      <title>Import-Export-Hub - All Products</title>
       <div className='bg-gray-50 py-10'>
         <h1 className="text-2xl text-center font-bold mb-5"> All Products</h1>
 

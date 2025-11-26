@@ -117,6 +117,7 @@ const Registration = () => {
 
   return (
     <section style={{ backgroundImage: `linear-gradient(rgba(255, 255, 255, 0.2), rgba(255, 255, 255, 0.2)), url(${regImg})`, backgroundSize: "cover", backgroundPosition: "center", backgroundRepeat: "no-repeat", }}>
+      <title>Import-Export-Hub - Registration</title>
       <div className='flex md:flex-row flex-col min-h-screen'>
         <div className='flex-1 my-auto md:text-left text-center lg:py-0 py-30'>
           <h1 className='lg:text-6xl text-3xl font-semibold text-white px-10'>Create an Account and start exploring..</h1>

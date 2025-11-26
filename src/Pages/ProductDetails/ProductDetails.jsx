@@ -99,6 +99,7 @@ const ProductDetails = () => {
 
   return (
     <section>
+      <title>Import-Export-Hub - Product Details</title>
       <div className="hero bg-gray-50 py-20">
         <div className="hero-content flex-col md:flex-row-reverse">
           <div className='flex-1'>
