@@ -16,7 +16,7 @@ const AllProducts = () => {
     const searchedText = e.target.search.value;
     setLoading(true);
 
-    fetch(`http://localhost:3000/search?search=${searchedText}`)
+    fetch(`https://import-export-hub-server-three.vercel.app/search?search=${searchedText}`)
       .then(res => res.json())
       .then(data => {
         // console.log(data);

@@ -9,7 +9,7 @@ const MyImports = () => {
   const [loading, setLoading] = useState(true);
   
   useEffect(() => {
-    fetch(`http://localhost:3000/myImports?email=${user.email}`, {
+    fetch(`https://import-export-hub-server-three.vercel.app/myImports?email=${user.email}`, {
       headers: {
         authorization: `Bearer ${user.accessToken}`,
       }

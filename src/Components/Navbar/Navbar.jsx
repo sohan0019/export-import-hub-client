@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { Link, NavLink, useNavigate } from 'react-router';
 import logo from '../../assets/Images/Logo.png'
 import { AuthContext } from '../../Context/AuthContext';
@@ -8,6 +8,8 @@ const Navbar = () => {
 
   const { user, signOutUser } = useContext(AuthContext);
   const navigate = useNavigate();
+  const [theme, setTheme] = useState(localStorage.getItem('theme') || "light")
+
   const links = <>
     <li className='hover:text-blue-900'><NavLink to="/">Home</NavLink></li>
     <li className='hover:text-blue-900'><NavLink to="/allProducts">All Products</NavLink></li>
@@ -29,6 +31,16 @@ const Navbar = () => {
       .catch(error => {
         toast.error(error.message)
       })
+  }
+
+  useEffect(() => {
+    const html = document.querySelector('html')
+     html.setAttribute("data-theme", theme)
+     localStorage.setItem("theme", theme)
+  }, [theme])
+
+  const handleTheme = (checked) => {
+    setTheme(checked ? "dark": "light")
   }
 
   return (
@@ -70,8 +82,14 @@ const Navbar = () => {
                       <li className="text-am">{user.email}</li>
                     </div>
 
+                    <input
+                      onChange={(e) => handleTheme(e.target.checked)}
+                      type="checkbox"
+                      defaultChecked={localStorage.getItem('theme') === "dark"}
+                      className="toggle my-2 mb-3" />
+
                     <li onClick={hangleSignOut} className="w-full">
-                      <a className="btn btn-info text-base w-full justify-center">Sign Out</a> 
+                      <a className="btn btn-info text-base w-full justify-center">Sign Out</a>
                     </li>
                   </ul>
                 </div>

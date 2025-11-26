@@ -29,7 +29,7 @@ const ExportCard = ({ product, onUpdate, onRemove }) => {
       confirmButtonText: "Yes, delete it!"
     }).then((result) => {
       if (result.isConfirmed) {
-        fetch(`http://localhost:3000/exportProduct/${_id}`, {
+        fetch(`https://import-export-hub-server-three.vercel.app/exportProduct/${_id}`, {
           method: 'DELETE',
           headers: {
             "content-type": "application/json",
@@ -64,7 +64,7 @@ const ExportCard = ({ product, onUpdate, onRemove }) => {
       updated_by: user.email,
     }
 
-    fetch(`http://localhost:3000/exportProduct/${_id}`, {
+    fetch(`https://import-export-hub-server-three.vercel.app/exportProduct/${_id}`, {
       method: 'PUT',
       headers: {
         "content-type": "application/json",

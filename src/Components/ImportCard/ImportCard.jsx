@@ -29,7 +29,7 @@ const ImportCard = ({ product, onRemove }) => {
     }).then((result) => {
       if (result.isConfirmed) {
 
-        fetch(`http://localhost:3000/product/${_id}`, {
+        fetch(`https://import-export-hub-server-three.vercel.app/product/${_id}`, {
           method: 'DELETE',
           headers: {
             "content-type": "application/json",

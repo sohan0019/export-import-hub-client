@@ -15,7 +15,7 @@ const ProductDetails = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    fetch(`http://localhost:3000/product/${id}`, {
+    fetch(`https://import-export-hub-server-three.vercel.app/product/${id}`, {
       headers: {
         authorization: `Bearer ${user.accessToken}`,
       }
@@ -65,7 +65,7 @@ const ProductDetails = () => {
       imported_by: user.email
     }
 
-    fetch(`http://localhost:3000/product/import/${product._id}`, {
+    fetch(`https://import-export-hub-server-three.vercel.app/product/import/${product._id}`, {
       method: 'POST',
       headers: {
         "content-type": "application/json",
